@@ -33,4 +33,4 @@
 (sqrt 1.7e+308) ; => 1.304e+154 is correct, but goes to infinite loop
 ; with larger numbers
 
-(sqrt (+ (square 30) (square 40)))
+(sqrt (+ (square 3) (square 4)))
