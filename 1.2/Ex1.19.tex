@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage[scaled=0.85]{beramono}
+\usepackage{fourier}
+\usepackage{vmargin}
+\setpapersize{custom}{130mm}{170mm}
+\setmarginsrb{1.5cm}{1.0cm} % left, top
+             {1.5cm}{1.0cm} % right, bottom
+             {12pt}{10pt} % head height, sep
+             {12pt}{10pt} % foot height, sep
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{\thepage}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\usepackage{amsmath}
+%\usepackage{setspace}
+%\onehalfspacing
+\usepackage{fancyvrb}
+
+\begin{document}
+
+\section*{Exercise 1.19}
+
+\subsection*{Derivation of the new transformation}
+
+Here is the given general transformation on a pair of integers:
+$$  T_{pq}(a, b) = 
+\begin{cases} 
+    a \gets a(p + q) + bq \\
+    b \gets bp + aq
+\end{cases} $$
+When $p = 0$ and $q = 1$, this reduces to the familiar special case for 
+generating consecutive \emph{Fibonacci} numbers:
+$$ T = T_{01}(a, b) = 
+\begin{cases} 
+    a \gets a + b \\
+    b \gets a
+\end{cases} $$
+We get a new transformation $T_{p'q'}$ by applying the transformation $T_{pq}$ 
+twice:
+$$ T_{p'q'} = T_{pq}(T_{pq}) = T_{pq} \cdot T_{pq} = T_{pq}^2 $$
+This means that we replace every $a$ with $a(p + q) + bq$ and every $b$ 
+with $bp + aq$ in the first formula of $T_{pq}$: 
+$$  T_{pq}^2(a, b) = 
+\begin{cases} 
+    a \gets (a(p + q) + bq)(p + q) + (bp + aq)q \\
+    b \gets (bp + aq)p + (a(p + q) + bq)q
+\end{cases} $$
+After multiplying out and rearranging, we get:
+$$  T_{pq}^2(a, b) = 
+\begin{cases} 
+    a \gets a(p^2 + q^2 + 2pq + q^2) + b(2pq + q^2) \\
+    b \gets b(p^2 + q^2) + a(2pq + q^2)
+\end{cases} $$
+By comparing this to the first formula, we see that:
+$$ \begin{cases} 
+  p' = p^2 + q^2 \\
+  q' = 2pq + q^2
+\end{cases} $$
+Now we are ready to use these in the program on next page.
+
+\newpage
+\subsection*{Program}
+
+\begin{Verbatim}
+(define (square x) (* x x))
+
+(define (fib n)
+  (fib-iter 1 0 0 1 n))
+
+(define (fib-iter a b p q count)
+  (cond ((= count 0) b)
+	((even? count)
+	 (fib-iter a
+		   b
+		   (+ (square p) (square q)) ; p'
+		   (+ (* 2 p q)  (square q)) ; q'
+		   (/ count 2)))
+	(else (fib-iter (+ (* b q) (* a q) (* a p))
+			(+ (* b p) (* a q))
+			p
+			q
+			(- count 1)))))
+\end{Verbatim}
+
+\end{document}
