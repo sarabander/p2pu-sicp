@@ -1,6 +1,13 @@
+% (c) Andres Raba 2011
+% GPL v.3
+
 \documentclass{article}
-\usepackage[scaled=0.85]{beramono}
-\usepackage{fourier}
+
+%\usepackage[scaled=0.85]{beramono}
+%\usepackage{fourier}
+\usepackage{inconsolata}
+\usepackage[bitstream-charter]{mathdesign}
+
 \usepackage{vmargin}
 \setpapersize{custom}{130mm}{170mm}
 \setmarginsrb{1.5cm}{1.0cm} % left, top
@@ -22,20 +29,36 @@
 %\onehalfspacing
 \usepackage{fancyvrb}
 
+% --------------------------------------------------
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+
+\definecolor{pythonblue}{RGB}{54,112,160}
+\definecolor{gray}{RGB}{112,112,112}
+
+\titleformat{\section}
+{\color{pythonblue}\normalfont\huge\bfseries}
+{}{}{{\color{pythonblue}}}
+
+\titleformat{\subsection}
+{\color{gray}\normalfont\Large\bfseries}
+{}{}{{\color{gray}}}
+% --------------------------------------------------
+
 \begin{document}
 
 \section*{Exercise 1.19}
 
 \subsection*{Derivation of the new transformation}
 
-Here is the given general transformation on a pair of integers:
+Here is the general transformation on a pair of integers:
 $$  T_{pq}(a, b) = 
 \begin{cases} 
     a \gets a(p + q) + bq \\
     b \gets bp + aq
 \end{cases} $$
-When $p = 0$ and $q = 1$, this reduces to the familiar special case for 
-generating consecutive \emph{Fibonacci} numbers:
+When $p = 0$ and $q = 1$, this reduces to the familiar case generating 
+consecutive \emph{Fibonacci} numbers if used with the seed pair $(1, 0)$:
 $$ T = T_{01}(a, b) = 
 \begin{cases} 
     a \gets a + b \\
@@ -62,7 +85,7 @@ $$ \begin{cases}
   p' = p^2 + q^2 \\
   q' = 2pq + q^2
 \end{cases} $$
-Now we are ready to use these in the program on next page.
+Now we are ready to use this result to complete the program.
 
 \newpage
 \subsection*{Program}

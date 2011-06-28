@@ -1,0 +1,221 @@
+% (c) Andres Raba 2011
+% GPL v.3
+
+\documentclass{article}
+
+%\usepackage[scaled=0.85]{beramono}
+%\usepackage{fourier}
+\usepackage{inconsolata}
+\usepackage[bitstream-charter]{mathdesign}
+
+\usepackage{vmargin}
+\setpapersize{custom}{130mm}{170mm}
+\setmarginsrb{1.5cm}{1.0cm} % left, top
+             {1.5cm}{1.0cm} % right, bottom
+             {12pt}{10pt} % head height, sep
+             {12pt}{10pt} % foot height, sep
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{\thepage}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\usepackage{amsmath}
+%\usepackage{setspace}
+%\onehalfspacing
+\usepackage{fancyvrb}
+
+% --------------------------------------------------
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+
+\definecolor{pythonblue}{RGB}{54,112,160}
+\definecolor{gray}{RGB}{112,112,112}
+
+\titleformat{\section}
+{\color{pythonblue}\normalfont\huge\bfseries}
+{}{}{{\color{pythonblue}}}
+
+\titleformat{\subsection}
+{\color{gray}\normalfont\Large\bfseries}
+{}{}{{\color{gray}}}
+% --------------------------------------------------
+
+\begin{document}
+
+\section*{Exercise 1.10}
+
+\subsection*{Amusements with Ackermann's function}
+
+Open this door at your own risk and proceed cautiously! You could stretch
+your imagination to the point of brain damage!
+
+This all starts very calmly. We are introduced to an innocent-looking little 
+procedure:
+
+\begin{Verbatim}
+(define (A x y)
+  (cond ((= y 0) 0)
+	((= x 0) (* 2 y))
+	((= y 1) 2)
+	(else (A (- x 1)
+		 (A x (- y 1))))))
+\end{Verbatim}
+
+And we are suggested to test it out with a few little expressions:
+
+\begin{Verbatim}
+(A 1 10) ; => 1024
+(A 2 4)  ; => 65536
+(A 3 3)  ; => 65536
+\end{Verbatim}
+
+Well, nothing fancy so far. {\tt (A 1 10)} produces 1024, which looks
+suspiciously like $2^{10}$. {\tt (A 1 4)} is 16 and {\tt (A 1 8)} is 256. 
+That's great, we have a pattern:
+$$ \hbox{\tt (A 1 y)} = 2^y $$
+
+Let's try some more: 
+
+\begin{Verbatim}
+(A 2 1) ; => 2
+(A 2 2) ; => 4
+(A 2 3) ; => 16
+(A 2 4) ; => 65536
+(A 2 5) ; => ...
+\end{Verbatim}
+
+Fascinating! The last one produces a Very Big Number---several screenfuls 
+of digits. Continuing with {\tt (A 2 6)}... and waiting... Still waiting... 
+Might as well take a break and have some tea. Bad idea! The procedure is 
+obviously not tail-recursive and piles up the stack. Quickly, press Ctrl-C 
+twice!
+
+Going down another avenue, we try {\tt (A 3 y)}:
+
+\begin{Verbatim}
+(A 3 1) ; => 2
+(A 3 2) ; => 4
+(A 3 3) ; => 65536
+(A 3 4) ; => ...
+\end{Verbatim}
+
+This sequence grows even faster! Let's unleash another monster:
+
+\begin{Verbatim}
+(A 4 1) ; => 2
+(A 4 2) ; => 4
+(A 4 3) ; => ...
+\end{Verbatim}
+ 
+Highly explosive! What construct could possibly grow so fast? To figure
+out what Ackermann's function actually does, we start by putting it's 
+definition into this form:
+$$
+A(x, y) =
+\begin{cases}
+  0  & \text{if $y = 0$,} \\
+  2y & \text{if $x = 0$,} \\
+  2  & \text{if $y = 1$,} \\
+  A(x - 1, A(x, y - 1)) & \text{otherwise} 
+\end{cases}
+$$
+We trace the process inductively, building up from the simplest case: 
+\begin{description}
+\item[x = 0:] $A(0, y) = 2y$, the argument is doubled.
+\item[x = 1:] $A(1, y) = A(0, A(1, y - 1)) = 2 \cdot A(1, y - 1) = 
+  2 \cdot A(0, A(1, y - 2)) = 2 \cdot 2 \cdot A(1, y - 2) = 2^y$, so it
+  recursively reduces to the previous case, multiplying by 2 on each step.
+\item[x = 2:] $A(2, y) = A(1, A(2, y - 1)) = 2^{A(2, y - 1)} = 
+  2^{A(1, A(2, y - 2))} = 2^{2^{A(2, y - 2)}} =
+  \underbrace{2^{2^{\,\cdot^{\,\cdot^{\,\cdot^{\,2}}}}}}_y = {^{y}\!2}$, it again
+calls the previous case, which results in successive 
+top-down exponentiation. Repeated exponentiation is called \emph{tetration}.
+\item[x = 3:] $A(3, y) = A(2, A(3, y - 1)) = {^{A(3, y - 1)}2} = 
+  {^{A(2, A(3, y - 2))}2} = {^{^{A(3, y - 2)}2}2} = 
+  \underbrace{^{^{^{^{^{2}\cdot\,}\cdot\,}\cdot}2}2}_y $, this is successive
+tetration.
+\item[x = 4:] ...and so on.
+\end{description}
+
+We have established a general pattern:
+
+$$ 
+\begin{array}{rcccccccl}
+A(0, y) & =  & {2y} & =  &
+\underbrace{2 + 2 + \ldots + 2}_y 
+& =  & 2 \uparrow^0 y & & \\
+
+A(1, y) & =  & {2^y} & =  & 
+\underbrace{2 \cdot 2 \cdot \ldots \cdot 2}_y 
+& =  & 2 \uparrow^1 y 
+& =  & 2 \uparrow y \\
+
+A(2, y) &  =  & {^{y}\!2} & =  &
+\underbrace{2^{2^{\,\cdot^{\,\cdot^{\,\cdot^{\,2}}}}}}_y 
+& =  & 2 \uparrow^2 y 
+& =  & 2 \uparrow\uparrow y \\
+
+A(3, y) &    & &  =  &
+\underbrace{^{^{^{^{^{2}\cdot\,}\cdot\,}\cdot}2}2}_y 
+&  =  & 2 \uparrow^3 y 
+&  =  & 2 \uparrow\uparrow\uparrow y \\
+
+A(4, y) &    & &  =  &
+\underbrace{^{^{^{^{^{2}\cdot\,}\cdot\,}\cdot}2}2}_{\underbrace{^{^{^{^{^{2}\cdot\,}\cdot\,}\cdot}2}2}_y 
+} 
+&  =  & 2 \uparrow^4 y 
+&  =  & 2 \uparrow\uparrow\uparrow\uparrow y \\
+
+\hspace{\fill} \vdots \hspace{\fill} & & & & & & \vdots & & 
+\hspace{\fill} \vdots \hspace{\fill} \\
+
+A(x, y) &    & &    &
+&  =  & 2 \uparrow^x y 
+&  =  & 2 \underbrace{\uparrow\uparrow\dots\uparrow}_x y 
+\end{array}
+$$
+
+Stunning! Turns out the $x$ in $A(x, y)$ chooses a particular operation 
+from an infinite hierarchy of operations. It starts with multiplication, 
+which is repeated addition. Next is exponentiation, which is
+repeated multiplication. After that we enter a cosmic realm of
+hyperoperations: tetration, pentation, hexation, ... 
+
+Let's see what happens with our earlier examples.
+$$
+\begin{array}{rcl}
+\hbox{\tt (A 2 3)} & = & 2^{2^2} = 16 \\
+\hbox{\tt (A 2 4)} & = & 2^{2^{2^2}} = 2^{16} = 65536 \\
+\hbox{\tt (A 2 5)} & = & 2^{2^{2^{2^2}}} = 2^{65536} \approx 
+2 \cdot 10^{19728} \\
+\hbox{\tt (A 2 6)} & = & 2^{2^{2^{2^{2^2}}}} = {^62} 
+\end{array}
+$$
+We get growing exponentiation towers. The last one is 2 raised to an exponent 
+so big it will take 10 pages to print. The resulting number is vastly bigger 
+than googolplex ($10^{10^{100}}$). The entire Universe isn't big enough
+to store this number! Not even after digital compression and using every quark 
+to store a bit.
+
+Still harder to comprehend are tetration towers:
+$$
+\begin{array}{rcl}
+\hbox{\tt (A 3 2)} & = & {^22} = 2^2 = 4 \\
+\hbox{\tt (A 3 3)} & = & {^{^{2}2}2} = {^42} = 2^{2^{2^2}} = 2^{16} = 65536 \\
+\hbox{\tt (A 3 4)} & = & {^{^{^{2}2}2}2} = {^{^{4}2}2} = {^{65536}2} = 
+\underbrace{2^{2^{\,\cdot^{\,\cdot^{\,\cdot^{\,2}}}}}}_{65536} 
+\end{array}
+$$
+
+How so compact notation unleashes so enormous processes 
+and creates so gigantic objects is utterly mindblowing! That's the secret power 
+of double recursion! All the other recursions we have seen so far are just 
+primitive recursions. Be it mutual recursions or tree recursions with two 
+or more branches, they are still primitive. 
+
+\end{document}

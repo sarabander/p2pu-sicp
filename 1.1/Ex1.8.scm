@@ -7,9 +7,9 @@
      (* 1.0e-20 guess)))
 
 ;; Formula for successice improvement of guess y:
-;;       x/y^2 + 2y
-;;  y -> ----------
-;;           3
+;;      x/y² + 2y
+;;  y → ---------
+;;          3
 
 (define (improve guess x) 
   (/ (+ (/ x (square guess)) 
@@ -50,9 +50,9 @@
 (cbrt 4.81e-321)
 (cube 10)
 
-;; Does this work?        x/y^2 + y
-;;                   y -> ---------
-;;                            2
+;; Does this work?       x/y² + y
+;;                   y → --------
+;;                          2
 
 (define (improve guess x) 
   (/ (+ (/ x (square guess)) 
