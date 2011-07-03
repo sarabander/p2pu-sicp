@@ -61,7 +61,5 @@
       (and (display string)
 	   (repeat string (- n-times 1)))))
 
-(repeat "\n" 5)
-
 (and (display "\n")
      (trianglerows 0 12))

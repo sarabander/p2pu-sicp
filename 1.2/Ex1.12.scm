@@ -18,11 +18,11 @@
 	(else (+ (pascal (- i 1) (- j 1))
 		 (pascal (- i 1) j)))))
 
-(pascal 0 2)
-(pascal 3 0)
-(pascal 3 1)
-(pascal 4 2)
-(pascal 5 4)
+;; (pascal 0 2)
+;; (pascal 3 0)
+;; (pascal 3 1)
+;; (pascal 4 2)
+;; (pascal 5 4)
 
 ;; Prints elements of a single row starting with element having
 ;; column index j = <first-elem> until j = <last-elem>.
@@ -37,12 +37,12 @@
 			   (else (repeat " " 5)))
 		     (printrow (+ first-elem 1) last-elem))))))
 
-(printrow 0 5) ; elements of 5th row from 0 to 5
+;; (printrow 0 5) ; elements of 5th row from 0 to 5
 
-(pascal 5 0)   ; 1st element of 5th row
-(printrow 1 5) ; rest of the elements of 5th row
+;; (pascal 5 0)   ; 1st element of 5th row
+;; (printrow 1 5) ; rest of the elements of 5th row
 
-(printrow 0 2) ; elements of 2nd row from 0 to 2
+;; (printrow 0 2) ; elements of 2nd row from 0 to 2
 
 ;; Prints triangle rows from <first> to <last>,
 ;; counting starts from zero
@@ -58,8 +58,6 @@
       (void)
       (and (display string)
 	   (repeat string (- n-times 1)))))
-
-(repeat "\n" 3)
 
 (and (display "\n")
      (trianglerows 0 15)
