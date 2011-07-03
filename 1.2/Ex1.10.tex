@@ -25,6 +25,7 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 \usepackage{amsmath}
+\newenvironment{rcase}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
 %\usepackage{setspace}
 %\onehalfspacing
 \usepackage{fancyvrb}
@@ -160,14 +161,15 @@ A(2, y) &  =  & {^{y}\!2} & =  &
 & =  & 2 \uparrow^2 y 
 & =  & 2 \uparrow\uparrow y \\
 
-A(3, y) &    & &  =  &
+A(3, y) &  =  & {_{y}\!2} &  =  &
 \underbrace{^{^{^{^{^{2}\cdot\,}\cdot\,}\cdot}2}2}_y 
 &  =  & 2 \uparrow^3 y 
 &  =  & 2 \uparrow\uparrow\uparrow y \\
 
 A(4, y) &    & &  =  &
-\underbrace{^{^{^{^{^{2}\cdot\,}\cdot\,}\cdot}2}2}_{\underbrace{^{^{^{^{^{2}\cdot\,}\cdot\,}\cdot}2}2}_y 
-} 
+\begin{rcase}
+\underbrace{^{^{^{^{^{2}\cdot\,}\cdot\,}\cdot}2}2}_{\underbrace{^{^{^{^{^{2}\cdot\,}\cdot\,}\cdot}2}2}_{\underbrace{\vdots}_2}} 
+\end{rcase} y
 &  =  & 2 \uparrow^4 y 
 &  =  & 2 \uparrow\uparrow\uparrow\uparrow y \\
 
@@ -218,4 +220,7 @@ of double recursion! All the other recursions we have seen so far are just
 primitive recursions. Be it mutual recursions or tree recursions with two 
 or more branches, they are still primitive. 
 
+Hyperexponentiation is a field of active research and still has many open 
+problems. For example, how do you build towers with fractional or complex 
+height? But we will not open that door today, and call it a night.
 \end{document}
