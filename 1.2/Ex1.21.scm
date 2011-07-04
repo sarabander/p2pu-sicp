@@ -22,3 +22,7 @@
 (smallest-divisor 561) ; 3
 (smallest-divisor 241) ; 241
 (smallest-divisor 169) ; 13
+
+(prime? 561) ; false
+(prime? 241) ; true
+(prime? 53)  ; true

@@ -1,5 +1,3 @@
-;; Depends on 1.24
-
 ;; How many times to run prime-test
 (define tries 1000) 
 
