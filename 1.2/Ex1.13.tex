@@ -1,0 +1,115 @@
+% (c) Andres Raba 2011
+% GPL v.3
+
+\documentclass{article}
+
+%\usepackage[scaled=0.85]{beramono}
+%\usepackage{fourier}
+\usepackage{inconsolata}
+\usepackage[bitstream-charter]{mathdesign}
+
+\usepackage{vmargin}
+\setpapersize{custom}{130mm}{170mm}
+\setmarginsrb{1.5cm}{1.0cm} % left, top
+             {1.5cm}{1.0cm} % right, bottom
+             {12pt}{10pt} % head height, sep
+             {12pt}{10pt} % foot height, sep
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{\thepage}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\usepackage{amsmath}
+\newenvironment{rcase}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{fancyvrb}
+
+\newcommand{\D}{\displaystyle}
+\newcommand{\T}{\textstyle}
+
+% --------------------------------------------------
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+
+\definecolor{pythonblue}{RGB}{54,112,160}
+\definecolor{gray}{RGB}{112,112,112}
+
+\titleformat{\section}
+{\color{pythonblue}\normalfont\huge\bfseries}
+{}{}{{\color{pythonblue}}}
+
+\titleformat{\subsection}
+{\color{gray}\normalfont\Large\bfseries}
+{}{}{{\color{gray}}}
+% --------------------------------------------------
+
+\begin{document}
+
+\section*{Exercise 1.13}
+
+\subsection*{Golden ratio and Fibonacci numbers}
+
+Using the definition of Fibonacci numbers:
+$$ 
+{\rm Fib}(n) = 
+\begin{cases}
+	0 & \text{if $n = 0$} \\
+	1 & \text{if $n = 1$} \\
+	{\rm Fib}(n-1) + {\rm Fib}(n-2) $\quad$ & \text{otherwise}
+\end{cases}
+$$
+and mathematical induction, we will prove that
+$$ \text{Fib}(n) = \frac{\varphi^n - \psi^n}{\sqrt{5}}. $$
+
+%\subsection*{Proof}
+
+First, we take $n = 0$ and $n = 1$ as induction base and show that 
+$ \text{Fib}(n) = \D\frac{\varphi^n - \psi^n}{\sqrt{5}} $ is valid in these cases.
+$$
+\begin{array}{rcl}
+\text{Fib}(0) & = & \D\frac{\varphi^0 - \psi^0}{\sqrt{5}} = 
+  \D\frac{1 - 1}{\sqrt{5}} = 0 \\
+
+\hspace{1ex} & & \\
+
+\text{Fib}(1) & = & \D\frac{\varphi^1 - \psi^1}{\sqrt{5}} =
+  \D\frac{1}{\sqrt{5}} \left(\D\frac{1 + \sqrt{5}}{2} - 
+\D\frac{1 - \sqrt{5}}{2}\right) =
+  \D\frac{2\sqrt{5}}{2\sqrt{5}} = 1 
+%\end{displaystyle}
+\end{array}
+$$
+Yes, they agree with the definition. 
+
+Next, we presume that the following is true for some $k < n$:
+$$ \text{Fib}(k) = \frac{\varphi^k - \psi^k}{\sqrt{5}}. $$
+We will show that the truth of last statement implies the truth of 
+$$ \text{Fib}(k + 1) = \frac{\varphi^{k+1} - \psi^{k+1}}{\sqrt{5}}. $$
+
+By definition of the Fibonacci sequence, and using the equations 
+$\varphi^2 = \varphi + 1$ and $\psi^2 = \psi + 1$ we have:
+\begin{eqnarray*}
+\text{Fib}(k+1) & = & \text{Fib}(k) + \text{Fib}(k-1) =
+\frac{\varphi^k - \psi^k}{\sqrt{5}} + 
+\frac{\varphi^{k-1} - \psi^{k-1}}{\sqrt{5}} \\
+& = &
+\frac{\varphi^{k-1} (\varphi + 1) - \psi^{k-1} (\psi + 1)}{\sqrt{5}} = 
+\frac{\varphi^{k-1} \varphi^2 - \psi^{k-1} \psi^2}{\sqrt{5}} \\
+& = &
+\frac{\varphi^{k+1} - \psi^{k+1}}{\sqrt{5}}. \quad \text{QED.}
+\end{eqnarray*}
+
+We have just established that the induction step is valid. This can now be
+used to show that if a statement with $n = k$ is true, then the one with 
+$n = k + 1$ is also true. We have already demonstrated that the base cases
+with $n = 0$ and $n = 1$ are true. These imply that the case with $n = 2$ 
+must also be true. Step by step, this leads to any $n$. Therefore, we can 
+safely assert the truth in general, with all $n$.
+
+\end{document}
