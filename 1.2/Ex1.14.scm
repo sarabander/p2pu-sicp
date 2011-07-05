@@ -33,7 +33,7 @@
 ;; Third version: 
 ;; --------------
 ;; additional condition
-;;   ((= kinds-of-coins 2) (+ 1 (floor (/ amount 5))))
+;;   ((= kinds-of-coins 2) (+ 1 (quotient amount 5)))
 ;; eliminates all subtrees with root node (cc amount 2)
 ;; and reduces number of steps even further
 (define (cc amount kinds-of-coins)
