@@ -1,16 +1,16 @@
 
-;; The golden ratio comes from this: 𝛗 = a/b = (a + b)/a = 1 + b/a = 1 + 1/𝛗.
-;; It is already clear from definition that 𝛗 is a fixed point of x ↦ 1 + 1/x.
-;; Another way to prove this is to use the exact value of 𝛗 in x ↦ 1 + 1/x.
+;; The golden ratio comes from this: 𝜑 = a/b = (a + b)/a = 1 + b/a = 1 + 1/𝜑.
+;; It is already clear from definition that 𝜑 is a fixed point of x ↦ 1 + 1/x.
+;; Another way to prove this is to use the exact value of 𝜑 in x ↦ 1 + 1/x.
 
-;; Multiplying both sides of 𝛗 = 1 + 1/𝛗 by 𝛗, we get 𝛗² = 𝛗 + 1.
+;; Multiplying both sides of 𝜑 = 1 + 1/𝜑 by 𝜑, we get 𝜑² = 𝜑 + 1.
 ;; Which numerical values satisfy this equation?
-;; Rearranging, we get 𝛗² - 𝛗 - 1 = 0, where 𝛗 = (1 ± √5)/2 ≈ 1.6180... 
+;; Rearranging, we get 𝜑² - 𝜑 - 1 = 0, where 𝜑 = (1 ± √5)/2 ≈ 1.6180... 
 
 ;; We will put this value into the right side of x ↦ 1 + 1/x and hope to
-;; arrive at the left side: 1 + 1/𝛗 = 1 + 2/(1 ± √5) = (1 ± √5 + 2)/(1 ± √5)
+;; arrive at the left side: 1 + 1/𝜑 = 1 + 2/(1 ± √5) = (1 ± √5 + 2)/(1 ± √5)
 ;;   (3 ± √5)(1 ∓ √5)   3 ∓ 3√5 ± √5 - 5   -2 ∓ 2√5   1 ± √5
-;; = ---------------- = ---------------- = -------- = ------ = 𝛗. ∎
+;; = ---------------- = ---------------- = -------- = ------ = 𝜑. ∎
 ;;   (1 ± √5)(1 ∓ √5)        1 - 5            -4        2
 
 ;; We will now compute the golden ratio using the provided procedure:
