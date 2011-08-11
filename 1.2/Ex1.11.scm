@@ -1,3 +1,4 @@
+
 ;; Recursive process
 (define (f1 n)
   (cond ((< n 3) n)
@@ -18,6 +19,17 @@
 		      (+ c (* 2 b) (* 3 a)) 
 		      (- count 1)))))
   (iter 0 1 2 n))
+
+;; The same, with slight change to avoid 2 unnecessary calculations of c
+(define (f2 n)
+  (define (iter a b c count) ; zeroth, first, second, counter
+    (cond ((< count 0) n)
+	  ((= count 0) c)
+	  (else (iter b 
+		      c 
+		      (+ c (* 2 b) (* 3 a)) 
+		      (- count 1)))))
+  (iter 0 1 2 (- n 2)))
 
 ;; Tests
 (f2 30)
