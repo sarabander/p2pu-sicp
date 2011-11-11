@@ -78,4 +78,4 @@
 
 (deriv '(+ (** x 3) (* 5 x)) 'x) ; '(+ (* 3 (** x 2)) 5)
 
-(deriv '(+ 3 x x 4 7) 'x)
+(deriv '(+ 3 x x 4 7) 'x) ; 1 (can't handle sums with more than 2 arguments)
