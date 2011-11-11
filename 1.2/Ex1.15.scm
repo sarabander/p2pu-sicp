@@ -50,3 +50,6 @@ counter ; => 5
 ;;
 ;; Because we got number 5 from taking a logarithm of angle a,
 ;; the order of growth is O(log a) in both space and time.
+;;
+;; Put another way: if we have a division of the angle by a constant at every
+;; invocation of the procedure, the number of steps grows logarithmically.

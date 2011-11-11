@@ -12,7 +12,9 @@
       ((if (xor (negative? a) (negative? x)) - +)
        (mult-iter-help (abs a) (abs x) 0))))
 
+;; The invariant quantity here is ax + b. 
 
 (mult-iter 12 -8)
-
 (mult-iter -11 21)
+(mult-iter -7 -6)
+(mult-iter 25 5)

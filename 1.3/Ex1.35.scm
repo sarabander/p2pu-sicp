@@ -5,13 +5,13 @@
 
 ;; Multiplying both sides of 𝜑 = 1 + 1/𝜑 by 𝜑, we get 𝜑² = 𝜑 + 1.
 ;; Which numerical values satisfy this equation?
-;; Rearranging, we get 𝜑² - 𝜑 - 1 = 0, where 𝜑 = (1 ± √5)/2 ≈ 1.6180... 
+;; Rearranging, we get 𝜑² - 𝜑 - 1 = 0, where 𝜑 = (1 + √5)/2 ≈ 1.6180... 
 
 ;; We will put this value into the right side of x ↦ 1 + 1/x and hope to
-;; arrive at the left side: 1 + 1/𝜑 = 1 + 2/(1 ± √5) = (1 ± √5 + 2)/(1 ± √5)
-;;   (3 ± √5)(1 ∓ √5)   3 ∓ 3√5 ± √5 - 5   -2 ∓ 2√5   1 ± √5
+;; arrive at the left side: 1 + 1/𝜑 = 1 + 2/(1 + √5) = (1 + √5 + 2)/(1 + √5)
+;;   (3 + √5)(1 - √5)   3 - 3√5 + √5 - 5   -2 - 2√5   1 + √5
 ;; = ---------------- = ---------------- = -------- = ------ = 𝜑. ∎
-;;   (1 ± √5)(1 ∓ √5)        1 - 5            -4        2
+;;   (1 + √5)(1 - √5)        1 - 5            -4        2
 
 ;; We will now compute the golden ratio using the provided procedure:
 
