@@ -39,5 +39,5 @@
 (count-pairs q) ; 3
 (count-pairs r) ; 3
 (count-pairs s) ; 3  [cyclic]
-(count-pairs z) ; 4  [cyclic]
+(count-pairs z) ; 3  [cyclic]
 (count-pairs '(1 2 3 4 5)) ; 5
