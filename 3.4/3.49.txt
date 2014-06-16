@@ -1,0 +1,11 @@
+
+Here's a contrived example: you rent a movie, but back home it turns out
+that it's a sequel. You keep the movie and next day you go back to rentals 
+to get the prequel. In the meantime I have rented the prequel and learned
+that it has a sequel. I want to watch both in one sitting, so I try to get
+the sequel also. We both keep the part we have already secured in the hopes
+that we get the other part soon. If there's only one of each, the situation
+doesn't resolve by itself and we could wait forever, if it wouldn't get
+expensive. To break the deadlock, one of us should back out and return the
+movie, or we could contact each other and negotiate, who gets to watch
+both parts first. Even better, we could watch them together!
