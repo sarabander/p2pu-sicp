@@ -10,31 +10,14 @@
   (display (denom x))
   (newline))
 
-;;  XOR: Exclusive OR
-;;
-;;    x      y   (xor x y)
-;;  ----------------------
-;;  false  false  false
-;;  false  true   true
-;;  true   false  true
-;;  true   true   false
-;;  ----------------------
-;;
-(define (xor x y)
-  (or (and x (not y)) 
-      (and y (not x))))
-
 (define (numer x) (car x))
 (define (denom x) (cdr x))
 
-(define (make-rat n d) 
-  (let ((g (gcd n d))
-	(sign (if (xor (positive? n) 
-		       (positive? d)) 
-		  - 
-		  +)))
-    (cons (/ (sign (abs n)) g) 
-	  (/ (abs d) g))))
+(define (make-rat n d)
+  (let ((g (abs (gcd n d))))
+    (if (< d 0)
+        (cons (/ (- n) g) (/ (- d) g))
+        (cons (/ n g) (/ d g)))))
 
 (print-rat (make-rat 12 -15))
 (print-rat (make-rat -4 -18))
