@@ -2,7 +2,7 @@
 (define (last-pair lst)
   (let ((butfirst (cdr lst)))
     (if (null? butfirst)
-	(list (car lst))
+	lst
 	(last-pair butfirst))))
 
 (last-pair '(k l m n)) ; '(n)
