@@ -4,11 +4,18 @@
       empty
       (append (reverse-list (cdr lst)) (list (car lst)))))
 
-(define (deep-reverse lst)
-  (cond ((null? lst) empty)
-	((not (pair? lst)) lst)
-	(else (append (deep-reverse (cdr lst)) 
-		      (list (deep-reverse (car lst)))))))
+(define (deep-reverse1 lst)
+    (if (pair? lst)
+        (append (deep-reverse1 (cdr lst))
+                (list (deep-reverse1 (car lst))))
+        lst))
+
+(define (deep-reverse2 lst)
+    (if (pair? lst)
+        (reverse (map deep-reverse2 lst))
+        lst))
+
+(define deep-reverse deep-reverse1)
 
 (deep-reverse '(1 2 3 4)) ; '(4 3 2 1)
 
