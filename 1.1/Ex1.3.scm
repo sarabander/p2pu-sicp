@@ -5,7 +5,7 @@
 (define (sqsum x y) (+ (sq x) (sq y)))
 
 (define (twolargest-sqsum a b c)
-  (cond (not (or (> a b) (> a c)) (sqsum b c))
+  (cond ((not (or (> a b) (> a c))) (sqsum b c))
 	(else (twolargest-sqsum b c a))))
 
 (define tlss twolargest-sqsum)
