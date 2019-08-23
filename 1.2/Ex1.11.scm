@@ -6,6 +6,18 @@
 		 (* 2 (f1 (- n 2)))
 		 (* 3 (f1 (- n 3)))))))
 
+
+; why do we need multiplication here ?
+; f(n) = f(n−1)+f(n−2)+f(n−3), if n ≥ 3.
+; Why don't just write like this:
+;; (define (f n) 
+;;   (if (< n 3)
+;;   n
+;;   (+ 
+;;     (f (- n 1))
+;;     (f (- n 2))
+;;     (f (- n 3)))))
+
 ;; Test 
 (f1 30)
 ;; takes 2 seconds
